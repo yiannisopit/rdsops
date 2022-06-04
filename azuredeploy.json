@@ -643,7 +643,8 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', 'cb-vm')]",
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions', 'gw-vm', 'gateway')]",
+                // "[resourceId('Microsoft.Compute/virtualMachines/extensions', 'gw-vm', 'gateway')]",
+                "/subscriptions/31c94fdb-b5be-4051-83a0-80e5e07f3368/resourceGroups/rg-rds/providers/Microsoft.Compute/virtualMachines/gw-vm/extensions/gateway",
                 "rdsh-vm-loop"
             ],
             "properties": {

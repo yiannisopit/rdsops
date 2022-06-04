@@ -147,42 +147,42 @@
 
     },
     "resources": [
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Network/publicIPAddresses",
-        //     "name": "[variables('publicIpAddressName')]",
-        //     "location": "[parameters('location')]",
-        //     "properties": {
-        //         "publicIPAllocationMethod": "Dynamic",
-        //         "dnsSettings": {
-        //             "domainNameLabel": "[parameters('dnsLabelPrefix')]"
-        //         }
-        //     }
-        // },
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Network/publicIPAddresses",
-        //     "name": "[variables('gatewayPublicIpAddressName')]",
-        //     "location": "[parameters('location')]",
-        //     "properties": {
-        //         "publicIPAllocationMethod": "Dynamic",
-        //         "dnsSettings": {
-        //             "domainNameLabel": "[parameters('gatewayIpDNS')]"
-        //         }
-        //     }
-        // },
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Network/publicIPAddresses",
-        //     "name": "[variables('brokerPublicIpAddressName')]",
-        //     "location": "[parameters('location')]",
-        //     "properties": {
-        //         "publicIPAllocationMethod": "Dynamic",
-        //         "dnsSettings": {
-        //             "domainNameLabel": "[parameters('connBrokerIpDNS')]"
-        //         }
-        //     }
-        // },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('publicIpAddressName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('gatewayPublicIpAddressName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('gatewayIpDNS')]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('brokerPublicIpAddressName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('connBrokerIpDNS')]"
+                }
+            }
+        },
         // {
         //     "apiVersion": "2020-06-01",
         //     "type": "Microsoft.Compute/availabilitySets",
@@ -222,209 +222,209 @@
         //         "name": "Aligned"
         //     }
         // },
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Network/loadBalancers",
-        //     "name": "loadBalancer",
-        //     "location": "[parameters('location')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
-        //     ],
-        //     "properties": {
-        //         "frontendIPConfigurations": [
-        //             {
-        //                 "name": "LBFE",
-        //                 "properties": {
-        //                     "publicIPAddress": {
-        //                         "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
-        //                     }
-        //                 }
-        //             }
-        //         ],
-        //         "backendAddressPools": [
-        //             {
-        //                 "name": "LBBAP"
-        //             }
-        //         ],
-        //         "loadBalancingRules": [
-        //             {
-        //                 "name": "LBRule01",
-        //                 "properties": {
-        //                     "frontendIPConfiguration": {
-        //                         "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', 'loadbalancer', 'LBFE')]"
-        //                     },
-        //                     "backendAddressPool": {
-        //                         "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools/', 'loadbalancer', 'LBBAP')]"
-        //                     },
-        //                     "protocol": "Tcp",
-        //                     "frontendPort": 443,
-        //                     "backendPort": 443,
-        //                     "enableFloatingIP": false,
-        //                     "idleTimeoutInMinutes": 5,
-        //                     "loadDistribution": "SourceIPProtocol",
-        //                     "probe": {
-        //                         "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'loadbalancer', 'tcpProbe')]"
-        //                     }
-        //                 }
-        //             },
-        //             {
-        //                 "name": "LBRule02",
-        //                 "properties": {
-        //                     "frontendIPConfiguration": {
-        //                         "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', 'loadbalancer', 'LBFE')]"
-        //                     },
-        //                     "backendAddressPool": {
-        //                         "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'loadbalancer', 'LBBAP')]"
-        //                     },
-        //                     "protocol": "Udp",
-        //                     "frontendPort": 3391,
-        //                     "backendPort": 3391,
-        //                     "enableFloatingIP": false,
-        //                     "idleTimeoutInMinutes": 5,
-        //                     "loadDistribution": "SourceIPProtocol",
-        //                     "probe": {
-        //                         "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'loadbalancer', 'tcpProbe')]"
-        //                     }
-        //                 }
-        //             }
-        //         ],
-        //         "probes": [
-        //             {
-        //                 "name": "tcpProbe",
-        //                 "properties": {
-        //                     "protocol": "Tcp",
-        //                     "port": 443,
-        //                     "intervalInSeconds": 5,
-        //                     "numberOfProbes": 2
-        //                 }
-        //             },
-        //             {
-        //                 "name": "tcpProbe01",
-        //                 "properties": {
-        //                     "protocol": "Tcp",
-        //                     "port": 3391,
-        //                     "intervalInSeconds": 5,
-        //                     "numberOfProbes": 2
-        //                 }
-        //             }
-        //         ],
-        //         "inboundNatRules": [
-        //             {
-        //                 "name": "rdp",
-        //                 "properties": {
-        //                     "frontendIPConfiguration": {
-        //                         "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations','loadBalancer','LBFE')]"
-        //                     },
-        //                     "protocol": "Tcp",
-        //                     "frontendPort": 3389,
-        //                     "backendPort": 3389,
-        //                     "enableFloatingIP": false
-        //                 }
-        //             }
-        //         ]
-        //     }
-        // },
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Network/networkInterfaces",
-        //     "name": "gw-nic",
-        //     "location": "[parameters('location')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Network/loadBalancers', 'loadBalancer')]"
-        //     ],
-        //     "properties": {
-        //         "ipConfigurations": [
-        //             {
-        //                 "name": "ipconfig",
-        //                 "properties": {
-        //                     "privateIPAllocationMethod": "Dynamic",
-        //                     "publicIPAddress": {
-        //                         "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('gatewayPublicIpAddressName'))]"
-        //                     },
-        //                     "subnet": {
-        //                         "id": "[variables('subnet-id')]"
-        //                     },
-        //                     "loadBalancerBackendAddressPools": [
-        //                         {
-        //                             "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools','loadBalancer', 'LBBAP')]"
-        //                         }
-        //                     ],
-        //                     "loadBalancerInboundNatRules": [
-        //                         {
-        //                             "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatRules','loadBalancer', 'rdp')]"
-        //                         }
-        //                     ]
-        //                 }
-        //             }
-        //         ],
-        //         "dnsSettings": {
-        //             "dnsServers": [
-        //                 "[parameters('dnsServerPrivateIp')]"
-        //             ]
-        //         }
-        //     }
-        // },
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Network/networkInterfaces",
-        //     "name": "cb-nic",
-        //     "location": "[parameters('location')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Network/loadBalancers', 'loadBalancer')]"
-        //     ],
-        //     "properties": {
-        //         "ipConfigurations": [
-        //             {
-        //                 "name": "ipconfig",
-        //                 "properties": {
-        //                     "privateIPAllocationMethod": "Dynamic",
-        //                     "publicIPAddress": {
-        //                         "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('brokerPublicIpAddressName'))]"
-        //                     },
-        //                     "subnet": {
-        //                         "id": "[variables('subnet-id')]"
-        //                     }
-        //                 }
-        //             }
-        //         ],
-        //         "dnsSettings": {
-        //             "dnsServers": [
-        //                 "[parameters('dnsServerPrivateIp')]"
-        //             ]
-        //         }
-        //     }
-        // },
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Network/networkInterfaces",
-        //     "name": "[concat(parameters('rdshNamingPrefix'), copyindex(), '-nic')]",
-        //     "location": "[parameters('location')]",
-        //     "copy": {
-        //         "name": "rdsh-nic-loop",
-        //         "count": "[parameters('numberOfRdshInstances')]"
-        //     },
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Network/loadBalancers', 'loadBalancer')]"
-        //     ],
-        //     "properties": {
-        //         "ipConfigurations": [
-        //             {
-        //                 "name": "ipconfig",
-        //                 "properties": {
-        //                     "privateIPAllocationMethod": "Dynamic",
-        //                     "subnet": {
-        //                         "id": "[variables('subnet-id')]"
-        //                     }
-        //                 }
-        //             }
-        //         ],
-        //         "dnsSettings": {
-        //             "dnsServers": [
-        //                 "[parameters('dnsServerPrivateIp')]"
-        //             ]
-        //         }
-        //     }
-        // },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Network/loadBalancers",
+            "name": "loadBalancer",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
+            ],
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "LBFE",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "LBBAP"
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "name": "LBRule01",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', 'loadbalancer', 'LBFE')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools/', 'loadbalancer', 'LBBAP')]"
+                            },
+                            "protocol": "Tcp",
+                            "frontendPort": 443,
+                            "backendPort": 443,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 5,
+                            "loadDistribution": "SourceIPProtocol",
+                            "probe": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'loadbalancer', 'tcpProbe')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "LBRule02",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations', 'loadbalancer', 'LBFE')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', 'loadbalancer', 'LBBAP')]"
+                            },
+                            "protocol": "Udp",
+                            "frontendPort": 3391,
+                            "backendPort": 3391,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 5,
+                            "loadDistribution": "SourceIPProtocol",
+                            "probe": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/probes', 'loadbalancer', 'tcpProbe')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "tcpProbe",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 443,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    },
+                    {
+                        "name": "tcpProbe01",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 3391,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ],
+                "inboundNatRules": [
+                    {
+                        "name": "rdp",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations','loadBalancer','LBFE')]"
+                            },
+                            "protocol": "Tcp",
+                            "frontendPort": 3389,
+                            "backendPort": 3389,
+                            "enableFloatingIP": false
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "gw-nic",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', 'loadBalancer')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('gatewayPublicIpAddressName'))]"
+                            },
+                            "subnet": {
+                                "id": "[variables('subnet-id')]"
+                            },
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools','loadBalancer', 'LBBAP')]"
+                                }
+                            ],
+                            "loadBalancerInboundNatRules": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatRules','loadBalancer', 'rdp')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "[parameters('dnsServerPrivateIp')]"
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "cb-nic",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', 'loadBalancer')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('brokerPublicIpAddressName'))]"
+                            },
+                            "subnet": {
+                                "id": "[variables('subnet-id')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "[parameters('dnsServerPrivateIp')]"
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[concat(parameters('rdshNamingPrefix'), copyindex(), '-nic')]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "rdsh-nic-loop",
+                "count": "[parameters('numberOfRdshInstances')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', 'loadBalancer')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnet-id')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "[parameters('dnsServerPrivateIp')]"
+                    ]
+                }
+            }
+        },
         // {
         //     "apiVersion": "2020-06-01",
         //     "type": "Microsoft.Compute/virtualMachines",

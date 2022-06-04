@@ -594,8 +594,9 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/availabilitySets', 'cb-availabilityset')]",
-                "[resourceId('Microsoft.Network/networkInterfaces', 'cb-nic')]",
-                "rdsh-vm-loop"
+                "[resourceId('Microsoft.Network/networkInterfaces', 'cb-nic')]"
+                // ,
+                // "rdsh-vm-loop"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -641,8 +642,9 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', 'cb-vm')]",
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions', 'gw-vm', 'gateway')]",
-                "rdsh-vm-loop"
+                "[resourceId('Microsoft.Compute/virtualMachines/extensions', 'gw-vm', 'gateway')]"
+                // ,
+                // "rdsh-vm-loop"
             ],
             "properties": {
                 "publisher": "Microsoft.Powershell",

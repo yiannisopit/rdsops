@@ -485,7 +485,7 @@
                         "typeHandlerVersion": "2.11",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "ModulesUrl": "[uri(parameters('_artifactsLocation'),concat('DSC/Configuration.zip', parameters('_artifactsLocationSasToken')))]",
+                            "ModulesUrl": "[uri('https://github.com/yiannisopit/rdsops/releases/download/test/Configuration.zip', parameters('_artifactsLocationSasToken')))]",
                             "ConfigurationFunction": "Configuration.ps1\\Gateway",
                             "properties": {
                                 "DomainName": "[parameters('adDomainName')]",

@@ -425,52 +425,53 @@
                 }
             }
         },
-        // {
-        //     "apiVersion": "2020-06-01",
-        //     "type": "Microsoft.Compute/virtualMachines",
-        //     "name": "gw-vm",
-        //     "location": "[parameters('location')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Compute/availabilitySets', 'gw-availabilityset')]",
-        //         "[resourceId('Microsoft.Network/networkInterfaces', 'gw-nic')]"
-        //     ],
-        //     "properties": {
-        //         "hardwareProfile": {
-        //             "vmSize": "[parameters('rdshVmSize')]"
-        //         },
-        //         "availabilitySet": {
-        //             "id": "[resourceId('Microsoft.Compute/availabilitySets', 'gw-availabilityset')]"
-        //         },
-        //         "osProfile": {
-        //             "computerName": "gateway",
-        //             "adminUsername": "[parameters('adminUsername')]",
-        //             "adminPassword": "[parameters('adminPassword')]"
-        //         },
-        //         "storageProfile": {
-        //             "imageReference": {
-        //                 "publisher": "[variables('imagePublisher')]",
-        //                 "offer": "[variables('imageOffer')]",
-        //                 "sku": "[parameters('imageSKU')]",
-        //                 "version": "latest"
-        //             },
-        //             "osDisk": {
-        //                 "name": "gw_OSDisk",
-        //                 "caching": "ReadWrite",
-        //                 "createOption": "FromImage",
-        //                 "managedDisk": {
-        //                     "storageAccountType": "StandardSSD_LRS"
-        //                 }
-        //             }
-        //         },
-        //         "networkProfile": {
-        //             "networkInterfaces": [
-        //                 {
-        //                     "id": "[resourceId('Microsoft.Network/networkInterfaces','gw-nic')]"
-        //                 }
-        //             ]
-        //         }
-        //     },
-        //     "resources": [
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "gw-vm",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/availabilitySets', 'gw-availabilityset')]",
+                "[resourceId('Microsoft.Network/networkInterfaces', 'gw-nic')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('rdshVmSize')]"
+                },
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', 'gw-availabilityset')]"
+                },
+                "osProfile": {
+                    "computerName": "gateway",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[variables('imagePublisher')]",
+                        "offer": "[variables('imageOffer')]",
+                        "sku": "[parameters('imageSKU')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "gw_OSDisk",
+                        "caching": "ReadWrite",
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "StandardSSD_LRS"
+                        }
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces','gw-nic')]"
+                        }
+                    ]
+                }
+            }
+        },
+            // "resources": [
         //         {
         //             "apiVersion": "2020-06-01",
         //             "type": "extensions",
@@ -502,7 +503,7 @@
         //                 }
         //             }
         //         }
-        //     ]
+            // ],
         // },
         {
             "apiVersion": "2020-06-01",
@@ -552,41 +553,42 @@
                         }
                     ]
                 }
-            },
-            "resources": [
-                {
-                    "apiVersion": "2020-06-01",
-                    "type": "Microsoft.Compute/virtualMachines/extensions",
-                    "name": "[concat(parameters('rdshNamingPrefix'), copyindex(),'/sessionhost')]",
-                    "location": "[parameters('location')]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('rdshNamingPrefix'), copyindex()))]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Powershell",
-                        "type": "DSC",
-                        "typeHandlerVersion": "2.11",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "ModulesUrl": "[uri('https://github.com/yiannisopit/rdsops/releases/download/test/Configuration.zip', parameters('_artifactsLocationSasToken'))]",
-                            "ConfigurationFunction": "Configuration.ps1\\SessionHost",
-                            "Properties": {
-                                "DomainName": "[parameters('adDomainName')]",
-                                "AdminCreds": {
-                                    "UserName": "[parameters('adminUsername')]",
-                                    "Password": "PrivateSettingsRef:AdminPassword"
-                                }
-                            }
-                        },
-                        "protectedSettings": {
-                            "Items": {
-                                "AdminPassword": "[parameters('adminPassword')]"
-                            }
-                        }
-                    }
-                }
-            ]
+            }
         },
+            // "resources": [
+        //         {
+        //             "apiVersion": "2020-06-01",
+        //             "type": "Microsoft.Compute/virtualMachines/extensions",
+        //             "name": "[concat(parameters('rdshNamingPrefix'), copyindex(),'/sessionhost')]",
+        //             "location": "[parameters('location')]",
+        //             "dependsOn": [
+        //                 "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('rdshNamingPrefix'), copyindex()))]"
+        //             ],
+        //             "properties": {
+        //                 "publisher": "Microsoft.Powershell",
+        //                 "type": "DSC",
+        //                 "typeHandlerVersion": "2.11",
+        //                 "autoUpgradeMinorVersion": true,
+        //                 "settings": {
+        //                     "ModulesUrl": "[uri('https://github.com/yiannisopit/rdsops/releases/download/test/Configuration.zip', parameters('_artifactsLocationSasToken'))]",
+        //                     "ConfigurationFunction": "Configuration.ps1\\SessionHost",
+        //                     "Properties": {
+        //                         "DomainName": "[parameters('adDomainName')]",
+        //                         "AdminCreds": {
+        //                             "UserName": "[parameters('adminUsername')]",
+        //                             "Password": "PrivateSettingsRef:AdminPassword"
+        //                         }
+        //                     }
+        //                 },
+        //                 "protectedSettings": {
+        //                     "Items": {
+        //                         "AdminPassword": "[parameters('adminPassword')]"
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     ]
+        // },
         {
             "apiVersion": "2020-06-01",
             "type": "Microsoft.Compute/virtualMachines",
@@ -594,9 +596,8 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/availabilitySets', 'cb-availabilityset')]",
-                "[resourceId('Microsoft.Network/networkInterfaces', 'cb-nic')]"
-                // ,
-                // "rdsh-vm-loop"
+                "[resourceId('Microsoft.Network/networkInterfaces', 'cb-nic')]",
+                "rdsh-vm-loop"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -642,9 +643,8 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', 'cb-vm')]",
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions', 'gw-vm', 'gateway')]"
-                // ,
-                // "rdsh-vm-loop"
+                "[resourceId('Microsoft.Compute/virtualMachines/extensions', 'gw-vm', 'gateway')]",
+                "rdsh-vm-loop"
             ],
             "properties": {
                 "publisher": "Microsoft.Powershell",

@@ -111,7 +111,7 @@
             "metadata": {
                 "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
             },
-            "defaultValue": ""
+            "defaultValue": "GHSAT0AAAAAABVEPOGPGIR6QVE7FAXM5KH2YU3DYHA"
         },
         "gatewayIpDNS": {
             "type": "string",
